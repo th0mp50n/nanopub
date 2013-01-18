@@ -148,689 +148,137 @@ th.datatable {
 	<section id='abstract'>bla bla</section>
 
 	<section>
-		<h2>Introduction</h2>
-		
-		<section id="aims">
-			<h3>Aims & Scope of this Guidelines</h3>
-			This document outlines the relationship between the Open PHACTS
-			System (OPS) see http://www.openphacts.org/) and a semantic data
-			model called nanopublications [[anatomy]]. The primary aim is to define the
-			format and organisation of nanopublications suitable for inclusion in
-			OPS. This document also clarifies the relationship between
-			nanopublications and “standard RDF” and the relation between
-			nanopublications and large datasets typically found in drug discovery
-			research. In doing so, we also introduce the concept of
-			“prenanopublication”.
-		</section>
-		<section>
-			<h3>Intended Audience</h3>
-			This document is intended for data owners who wish to understand the
-			Open PHACTS approach to nanopublication and adopt this within their
-			own projects. These guidelines will help data providers create
-			nanopublications in their most citeable form.
-		</section>
-		<section>
-			<h3>The Nanopublication Schema</h3>
-			<div class="figure">
-				<p>
-					<img width="100%" src="figures/image001.png"></img></p>
-				<p>Anatomy of a nanopublication, modified from [[anatomy]], and
-					implemented here using RDF named graphs composed of subject (s),
-					predicate (p) and object (o) combinations</p>
-			</div>
+		<h3>Introduction</h3>
+                A nanopublication is the smallest unit of publishable information and is composed of a single assertion and its provenance metadata. A nanopublication is a schema (defined below) that sits on top of existing semantic web technology. Essentially, a nanopublication augments ordinary linked data with provenance annotations. 
+                    
+                Creating a nanopublication requires a one-time effort to model the assertion and provenance as RDF named graphs. After submission to an open, decentralized nanopublication store, the nanopublication will be available both to humans and automated inference and discovery engines. Nanopublications are stand-alone publications, but can also augment traditional research articles.
+                    
+                This document offers Concept Web Alliance (CWA) recommendations and specifications for composing, implementing, and using nanopublications. It provides definitions, good practices and examples to help data producers author their own nanopublications. Nanopublication infrastructure is administered by the CWA, and is based on open standards. We anticipate the community-driven evolution of nanopublication formats to fit the changing needs of authors and publishers.
 
-
-			<p>A nanopublication is the smallest unit of publishable
-				information: an assertion about anything that can be uniquely
-				identified and attributed to its author. Nanopublications support
-				fine-grained attribution to authors and institutions, with the
-				intention of incentivising the reuse of data [[valueofdata]]. These assertions
-				are organized using (a) the domain semantics drawn from community
-				ontologies and information models, and (b) a nanopublication model
-				linking the assertion to its provenance.</p>
-			<p>RDF and nanopublications were adopted as standards to be used
-				in the Open PHACTS Proposal as a “data model for structuring,
-				linking and organising data…” The OPS nanopublication model is
-				depicted in figure 1. The minimal elements being:</p>
-			<dl>
-				<dt>Assertion</dt>
-				<dd>This contains statements that compose a scientific
-					assertion being made by the author(s). Statistical p-values and
-					other indicators of validity should be recorded here.</dd>
-				<dt>Provenance</dt>
-				<dd>
-					This is the origin of the assertion, how this assertion “came to
-					be”. Provenance includes:
-					<dl>
-						<dt>Supporting Information</dt>
-						<dd>Important contextual information regarding the assertion
-							can be added, analogous to “tags” in a Web2.0 context. The
-							primary purpose of this element is to permit high-level filtering
-							of large nanopublication datasets. Crucially, this section
-							contains statements that the author is not claiming are their
-							original invention, but are nonetheless properties that a
-							consumer will need when searching and filtering large
-							nanopublication sets. For example, for an assertion that protein
-							A interacts with protein B, supporting information might include
-							the species (e.g., human, mouse) and method where this was found
-							(e.g., whether the data comes from laboratory experiments or from
-							in silico predictions).</dd>
-						<dt>Attribution</dt>
-						<dd>Who made this data? Who made this nanopublication? When
-							did they make it? Who owns the rights? The purpose of Attribution
-							is to link the assertion to the reputation of a person (or
-							institution) along with a time stamp.</dd>
-					</dl>
-				</dd>
-			</dl>
-		</section>
-		<p>
-			Other components include:<br>
-		<dl>
-			<dt>Nanopublication ID</dt>
-			<dd>Each nanopublication is unique and has a URI. See
-				versioning, page 13.</dd>
-			<dt>Integrity Key
-			<dt>
-			<dd>This ensures authenticity on behalf of the author, i.e. a
-				consumer can be sure that it really is the ascribed author who is
-				making the statement. Note that this is a place holder and the
-				standards here are a work in progress and will not be described in
-				this document.
-		</dl>
-		<p>This nanopublication model is designed to be extensible i.e. as
-			new features are required, one can create new elements in the model
-			(see later section on extensibility). Older nanopublications may not
-			have the newer components, but will retain compatibility. In this
-			guideline we also introduce the concept of “prenanopublication” as a
-			way to publish large experimental datasets in a
-			nanopublication-friendly manner for potential use by the Open PHACTS
-			system.
-		</dd>
-		</p>
 	</section>
 
 	<section>
-		<h3>Data Provision in Open PHACTS</h3>
-		<p>The Open PHACTS project aims to produce an open semantic
-			framework for pre-competitive pharmacological data. RDF was chosen as
-			the underlying data representation technology given its potential for
-			data integration and interoperation. A full description of the chosen
-			architecture of the system is available at openphacts.org. While it
-			is not necessary to review this to understand this document, there
-			are some key principles worth mentioning:</p>
-		<p>The OPS data store should be thought of as a data cache rather
-			than an as ordinary database. For any dataset, the “authoritative”
-			RDF is produced and hosted by the original provider. The OPS system
-			“harvests” this RDF (with systems to monitor updates etc) and loads
-			it into a local OPS cache for automated reasoning. The OPS cache is
-			optimised to support specific queries and web-services required to
-			address drug discovery questions. Consequently, the OPS cache is not
-			a “general RDF” repository. Rather, it holds only those resources
-			required to address specific OPS use-cases.</p>
-		<p>For non-pharmacology based use-cases, we believe the same
-			principles (and much of the OPS software) can be applied to create
-			new cache-based implementations to serve different knowledge domains.
-			Thus, OPS will produce not just a working system tailored towards
-			pharmacology, but a toolkit to create similar systems for other
-			problems.</p>
-		<p>To be included in OPS, data needs to be in RDF, but not
-			necessarily as nanopublications. Although RDF is required the
-			additional information that compose nanopublications is optional and
-			at the discretion of the provider. As the primary purpose of
-			nanopublications is to provide attribution, this decision should be
-			based on the providers’ views regarding citeability of the data in
-			question.</p>
+		<h3>Why Nanopublications?</h3>
+                When serialized in RDF, nanopublications are interoperable and machine readable, and need not be tethered to centralized databases or research articles for their retrieval and use. Individual nanopublications can be cited and their impact tracked, creating incentives compliance with open semantic web standards (interoperability), community annotation, rapid dissemination and automated reasoning. The provenance can help users decide about the trustworthiness of the assertion and it provides a vehicle for fine-grained attribution to authors and institutions with the intention of incentivizing the accessibility and reuse of data. 
+
+                Nanopublications are a natural response to the explosion of high-quality contextual information that overwhelms the capacity of conventional research articles in scholarly communication. With nanopublications, it is possible to disseminate individual data as independent publications with or without an accompanying research article. Nanopublications can be used to expose quantitative and qualitative data, experimental data as well as hypotheses, novel or legacy data and negative data that usually goes unpublished.
 	</section>
 
 	<section>
 		<h3>The OPS Nanopublication Scheme</h3>
-		<p>“Anatomy of a Nanopublication” [[anatomy]] describes the basic
-			principles for constructing individual nanopublications using RDF
-			Named Graphs. Importantly, we modify the original nanopublication
-			scheme in the following ways:</p>
+                Definitions
+The nanopublication schema combines the assertion and its provenance into a single publishable and citable entity. Both the assertion and provenance are RDF graphs. 
 
-		<p>A nanopublication assertion may consist of more than one
-			subject-predicate-object triple. Specifically, a nanopublication
-			represents a single scientific assertion encoded in RDF, regardless
-			of the number of triples required to represent that assertion.</p>
+An assertion is a minimal unit of thought, expressing a relationship between two concepts (called the Subject and the Object) using a third concept (called the Predicate). The assertion graph of the nanopublication will take the form of one or more semantic triples (subject-predicate-object combinations). Examples... The scope of the assertion is somewhat arbitrary but as a rule of thumb, it can be limited by what exactly that the author would like to be known for. If it is common in your domain to report evidence or error values with your assertion, then they SHOULD be included here otherwise they will appear in the provenance graph. 
 
-		<p>A recommendation that all nanopublications use an ontology to
-			describe the class of each named graph [
-			http://www.w3.org/2004/03/trix/ ]. As the use of named graphs in
-			semantic data is increasing, there is a need to distinguish the use
-			of this approach for nanopublication versus other applications. The
-			current Nanopublication ontology is described below, although one
-			should always refer to the most current version at
-			http://nanopub.org/nschema.</p>
+Provenance means, ‘how this came to be’ and provenance graph includes statements for metadata such as methods and parameter settings, as well as attribution such as authors, institutions, time-stamps, grants, links to DOIs, URLs. A nanopublication MUST have provenance of the assertion (the subject being the assertion). A nanopublication MAY have provenance of the creation nanopublication (the subject being the nanopublicaiton). The latter case when the authors of the assertion are different than the authors of the nanopublication. Additional metadata can be added to this minimal structure to accommodate an ever-larger range and finer-grained array of evidence factors and attribution.
 
-		<p>The term Provenance can have very broad meaning, including the
-			methods and context supporting the assertion as well as time/date
-			stamps, authorship, etc. As the primary purpose of nanopublications
-			is to incentivize data sharing, we separate the provenance
-			information into two distinct RDF named graphs: Attribution (where
-			credit is assigned to people or institutions doing the hard work of
-			publishing high quality data) and Supporting Information (that would
-			include anything else that might be considered provenance).</p>
+A third graph, the publicationInfo, contains statements for provenance referring to the creation of the nanopublication (the subject MUST be the nanopublicaiton). In addition to attribution (recommended publication roles…), the publicationInfo graph contains a date/time stamp (using pro).
 
-		<p>In addition to outlining the use of the nanopublication
-			ontology to type and connect named graphs, the example given below
-			also highlights the use of existing vocabularies to identify
-			predicates and entities wherever possible. It also includes a
-			suggestion as to how the Dublin Core vocabulary can be used to mark a
-			version number for the assertion, again discussed in a later section:</p>
+In order to maintain flexibility we do not express this requirement in OWL. 
 
+The CWA recommended nanopblucation schema is given below and can be linked to at http://nanopub.org/nschema
 
-		<pre class='example'>
-# Open PHACTS Nanopublication Schema
-# A nanopublication has an assertion & provenance (where provenance has
-supporting & attribution information).
+		<pre class='schema'>
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdfg: <http://www.w3.org/2004/03/trix/rdfg-1/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix np: <http://www.nanopub.org/nschema#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 
-@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
-@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;.
-@prefix rdfg: &lt;http://www.w3.org/2004/03/trix/rdfg-1/&gt;.
-@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt;.
-@prefix np: &lt;http://www.nanopub.org/nschema#&gt;.
- 
+<http://www.nanopub.org/nschema> a owl:Ontology ;
+	dc:created "2012-10-26"^^xsd:date;
+	dc:modified "2012-10-26"^^xsd:date;
+	dc:creator "Paul Groth"^^xsd:string, 
+		"Andrew Gibson"^^xsd:string;
+		dc:contributor "Zuotian Tatum"^^xsd:string;
+	owl:priorVersion <http://www.nanopub.org/nschema-1.8>.
+
+## A nanopublication should be associated with an assertion, publicationInfo and provenance,
+## all of which are graphs. In order to maintain flexibility we do not express this requirement
+## in OWL
+
 np:Nanopublication rdf:type owl:Class.
 np:Assertion rdfs:subClassOf rdfg:Graph.
 np:Provenance rdfs:subClassOf rdfg:Graph.
-np:Attribution rdfs:subClassOf rdfg:Graph.
-np:Supporting rdfs:subClassOf rdfg:Graph.
- 
-np:hasAssertion rdf:type owl:FunctionalProperty.
+np:PublicationInfo rdfs:subClassOf rdfg:Graph.
+
+np:hasAssertion a owl:FunctionalProperty.
 np:hasAssertion rdfs:domain np:Nanopublication.
 np:hasAssertion rdfs:range np:Assertion.
- 
-np:hasProvenance rdf:type owl:FunctionalProperty.
+
+np:hasProvenance a owl:FunctionalProperty.
 np:hasProvenance rdfs:domain np:Nanopublication.
 np:hasProvenance rdfs:range np:Provenance.
+
+np:hasPublicationInfo a owl:FunctionalProperty.
+np:hasPublicationInfo rdfs:domain np:Nanopublication.
+np:hasPublicationInfo rdfs:range np:PublicationInfo."
+                </pre>
+
+These recommendations will be exemplified and elaborated upon in a library of nanopublication templates http://nanopub.org/wordpress/?page_id=8
+
+
+Integrity Key
+ task force [Alasdair, Paul, Mark]
+-- use cases.... why have integrity keys ? 
+-- in principle, integrity keys are unique to nanopubs
+-- but integrity keys are not a part of the nanopub 
+-- keys are organization independent
+-- we need to recommend an algorithm (an RDF hasher) 
+
+
+
+
+
+
+
+
+
+Nanopublication Compliant RDF for Large Data Sets
+Big Data & nanopublication…. [Zuotian, Erik, Alasdair]
  
-np:hasAttribution rdfs:subPropertyOf rdfg:subGraphOf.
-np:hasAttribution rdfs:domain np:Provenance.
-np:hasAttribution rdfs:range np:Attribution.
- 
-np:hasSupporting rdfs:subPropertyOf rdfg:subGraphOf.
-np:hasSupporting rdfs:domain np:Provenance.
-np:hasSupporting rdfs:range np:Supporting.
-</pre>
 
-		<p>Using this nanopublication schema, below is a nanopublication
-			representing a simple gene-disease association predicted from text
-			mining PubMed abstracts. In this example, the nanopublication asserts
-			that the human gene CENPJ (Entrenz gene id 55835) has a predicted
-			association to Seckel Syndrome (OMIM id 210600), with a p-value
-			around 0.00007.</p>
 
-		<pre class='example'>
-@prefix dcterms: &lt;http://purl.org/dc/terms/&gt; .
-@prefix nanopub: &lt;http://www.nanopub.org/nschema#&gt; .
-@prefix opm: &lt;http://purl.org/net/opmv/ns#&gt; .
-@prefix pav: &lt;http://swan.mindinformatics.org/ontologies/1.2/pav/&gt; .
-@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
-@prefix sio: &lt;http://semanticscience.org/resource/&gt; .
-@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
- 
-@base &lt;http://rdf.biosemantics.org/vocabularies/gene_disease_nanopub_example#&gt; .
- 
-{
-      NanoPub_1 a nanopub:Nanopublication ;
-            nanopub:hasAssertion NanoPub_1_Assertion ;
-            nanopub:hasProvenance NanoPub_1_Provenance .
-     
-      NanoPub_1_Provenance nanopub:hasAttribution NanoPub_1_Attribution ;
-            nanopub:hasSupporting NanoPub_1_Supporting .
-     
-      NanoPub_1_Assertion a nanopub:Assertion .
-      NanoPub_1_Provenance a nanopub:Provenance .    
-      NanoPub_1_Attribution a nanopub:Attribution .  
-      NanoPub_1_Supporting a nanopub:Supporting .
-}
-     
-NanoPub_1_Assertion {
-      Association_1 a sio:association;
-            sio:has-measurement-value Association_1_p_value ;
-        sio:has-attribute &lt;http://bio2rdf.org/geneid:55835&gt;, &lt;http://bio2rdf.org/omim:210600&gt; ;
-            rdfs:comment """This association has p-value of 0.00066, has attribute gene CENPJ (Entrenz gene id 55835)
-            and attribute disease Seckel Syndrome (OMIM 210600)."""@en .
-     
-      Association_1_p_value a sio:probability-value ;
-            sio:has-value "0.0000656211037469712"^^xsd:float .
-}
- 
-NanoPub_1_Attribution {
-      NanoPub_1 dcterms:created "2012-01-30T16:32:30.758274Z"^^xsd:dateTime ;
-            pav:authoredBy &lt;http://www.researcherid.com/rid/B-6035-2012&gt; ,
-                &lt;http://www.researcherid.com/rid/B-5927-2012&gt; ;
-            pav:createdBy &lt;http://www.researcherid.com/rid/B-5852-2012&gt; ;
-            dcterms:hasVersion "1.0" ;
-            dcterms:rights &lt;http://creativecommons.org/licenses/by/3.0/&gt; ;
-            dcterms:rightsHolder &lt;http://biosemantics.org&gt; .
-}
- 
-NanoPub_1_Supporting {
-      Association_1 opm:wasDerivedFrom &lt;http://rdf.biosemantics.org/vocabularies/text_mining/gene_disease_concept_profiles_1980_2010&gt; ;
-          opm:wasGeneratedBy &lt;http://rdf.biosemantics.org/vocabularies/text_mining/gene_disease_concept_profiles_matching_1980_2010&gt; .
-}
-	</pre>
-		<p>Structuring the data in this way allows us to perform Sparql
-			queries to extract information from nanopublication repositories. For
-			instance, the query below will find all the nanopublications that
-			have some provenance in which the creator is JohnSmith</p>
-		<pre class='example'>
-	select * where {
-    ?nanopub &lt;http://www.nanopub.org/nschema#hasProvenance&gt; ?prov.
-    Graph ?prov
-     {?s &lt;http://purl.org/dc/elements/1.1/creator&gt; &lt;http://www.example.org/mypubs/JohnSmith&gt;.}
-}
-	</pre>
+Best & Good Practices [everyone.... after we practice some]
+How nanopublications relate to traditional publications… 
 
-	</section>
+Immutability & versions & deprecations…
+-- Nanopublications SHOULD be immutable
+-- immutability applies only to the nanopublication itself and not to resources linked to it... but creators SHOULD choose stable URIs when possible. 
+-- Versioning: we use prov ‘hasRevision’
+-- recommendations on deprecations, retraction... ‘hasStatus’ ? 
+-- use of blank nodes# URIs
+-- # URIs... best practice for URIs (persistant & registry)   ...nanopub.og...
 
-	<section>
-		<h2>Large Datasets &amp; PreNanopublication</h2>
+Whenever possible, existing ontologies and URIs should be used in semantic markup of nanopublication information. CWA recommended ontologies are… 
 
-		<section>
-			<h3>Singleton Nanopublications versus Big Data Nanopublications</h3>
-			<p>One perspective on nanopublication involves their de novo
-				creation by human beings. This can be done using semantic tools
-				while authors are writing articles or reflecting on experimental
-				results. In this case, nanopublications are conceptually similar to
-				traditional publication – a scientist publicly declaring an
-				assertion that, should it be re-used in support of other scientific
-				claims, will get citation. For those wishing to generate one-off or
-				small numbers of de-novo nanopublications, reference [[anatomy]] coupled
-				with the recommendations above should suffice.</p>
+The primary challenge when nanopublishing data is to model the semantics for clarity and keep a clear separation between the actual observations (measurements) from the interpretations (scientific assertions) and mark-up this distinction in as unambiguous way as possible. Other considerations include economization of memory usage, time-efficient querying, and avoidance of logical inconsistencies. 
+Nanopublications should present as low a barrier as possible to the exposure of data. Hence nanopublications have a minimal requirement of an assertion and provenance, but are extensible. The basic idea is that a minimal nanopublication can be easily created, but the better the annotation the more likely it is that the nanopublication will be found, used and cited by others. In other words, there is strong incentive for rich annotation, but a low barrier to getting started.
+Templates 
+•	statistical association [LUMC]
+•	genomic positions [LUMC, Christine-Oliver]
+•	curation: nextprot [Christine-Oliver]; chemspider [Colin]
+•	lots of chem-text [Colin]
+•	landMark [Mark]
 
-			<p>However, large numbers of assertions (100s, 1000s or more) may
-				be derived from large online databases and high-throughput
-				experiments. Data providers may use nanopublications as a mechanism
-				to expose individual assertions and enable citation and attribution
-				of individual datum. Nanopublication consumers, such as Open PHACTS
-				users, may generate results from analysis of these assertions. Those
-				nanopublications that contributed to a new result can be cited via
-				their URI, providing benefit to the authors [[valueofdata]]. Using
-				nanopublications in these two contexts places very different demands
-				on computational infrastructure and so we recommend the following
-				for nanopublication from large-scale data generating systems.</p>
-		</section>
+Implementation issues
+•	Repository / Store (e.g., URI control & data linking) [Rob & Marco]
+	-- Issuing URIs (DOIs?) ... what do nanopub IDs look like ?
+		nanopub.org////nextprot/nanopubID
+	-- concept wiki infrastructure
+	-- URI creation service (CW) + linking service (Right Field)
 
-		<section>
-			<h3>Nanopublications From Large Databases</h3>
-			<p>The nanopublication framework was conceived as a way to enable
-				the semantic citation of individual assertions [[valueofdata]]. Hence,
-				nanopublication is a layer on top of RDF encoded data. The intention
-				of nanopublications is to provide a standard for the identification
-				of individual scientific assertions within a dataset, enabling
-				provenance to be assigned to the dataset itself or to individual
-				assertions within the dataset.</p>
+•	Registry [Erik, Mark]
+	-- nanopu.org is an aggregator of registries like datahub (using “nanopub” tags)
+	-- nanopu.org is an instance for exclusive nanopub data (ckan powers data hub)
 
-			<p>An example is shown in Figure 2a. Here a dataset in tabular
-				form such that each “row” gives specific relations between entities
-				that can be thought of as scientific assertions. When converted to
-				RDF, these assertions can be represented as a collection of semantic
-				triples. Some nodes may be “reused”, partaking in multiple
-				assertions (e.g. the URIs that represent the concepts of “human” or
-				“mouse” could be re-used thousands of times to indicate species in
-				each data row). The resulting RDF encodes a graph of nodes and
-				edges, but one where reconstructing specific individual assertions
-				can be difficult for both humans and machines. The named graph
-				approach (Figure 2b) augments this RDF, demarcating the scientific
-				assertions and the triples that compose them. Essentially, the named
-				graphs provide a mechanism to “draw a ring around” the set of
-				triples that denote each scientific assertion and make them distinct
-				from the triples composing the provenance.</p>
+        
+        </section>
 
-			<div class="figure">
-				<p>
-					<img width="100%" src="figures/image004.jpg"></img>
-				<p>
-					<strong>Figure 2:</strong> Note,figure needs revision. Named graphs
-					facilitate the identification of individual assertions in RDF. (A)
-					Data in a table (top) can be converted to standard RDF forming
-					individual assertions (bottom, each assertion is coloured
-					separately). This RDF implies a graph structure of nodes and edges.
-					(B) A graphical representation of the data with individual
-					assertions ‘circled’ and colour coded to match the data in the
-					table.
-			</div>
-		</section>
 
-		<p>Large datasets will often be a mix of assertions, provenance
-			and other supporting data i.e. the components of a nanopublication.
-			Thus, identification of specific assertions by the data provider is a
-			big step towards nanopublication. For instance, a database of
-			pharmacology results may contain assertions that a drug inhibits a
-			protein with a certain activity value. It may also provide a Medline
-			ID as a reference but also other fields regarding that reference
-			(title, journal, keywords etc). While the Medline ID is useful
-			information for the nanopublication, the other fields, though
-			perfectly valid inclusions to the overall RDF dataset, they may be
-			seen as ancillary to the assertion or provenance elements of the
-			nanopublication. Therefore:</p>
-
-		<p>Assertions and “ancillary data” may co-exist in the same RDF.
-			Not all data in an RDF dataset should be represented as
-			nanopublications.</p>
-
-		<section>
-			<h3>Prenanopublications</h3>
-			<p>Large, machine produced datasets are now common place. Many
-				bioinformatics and /chemoinformatics databases are built by curating
-				data from many different sources including extraction of data from
-				publications, in silico models, or other bioinformatics
-				applications. There are also datasets generated from large-scale
-				experiments, such as high-throughput ‘omics analyses and
-				pharmacological screening. The principles of linked data encourage
-				authors to release large datasets in RDF as part of the linked data
-				cloud [[ldb]]. But to increase the citeability of these data, dataset
-				producers could also expose this data as nanopublications.</p>
-
-			<p>However, before proceeding along this path, data providers
-				should consider carefully what sort of information is to be released
-				and how will it benefit data consumers. For nanopublication, some
-				attempt should be made to interpret and summarise the data, creating
-				relevant scientific assertions that can be easily consumed by
-				others. Specifically:</p>
-
-			<p>Nanopublications concern scientific assertions that are
-				actionable information. This implies some level of scientific
-				interpretation by the data provider.</p>
-
-			<p>We must consider the question: are all nanopublications
-				created “equal”? Nanopublications from scientists declaring a single
-				new scientific fact represent a different type of knowledge compared
-				to 100,000 assertions generated directly from a genomics experiment.
-				For the latter, most of theses assertions probably confirm
-				associations already known and/or may never further scientific
-				progress. Such mass-produced data is likely to have the following
-				features:
-			<p>
-			<ul>
-				<li>The assertions are simply a data point in the dataset, and
-					their role in any real-world process is as yet, unknown.</li>
-				<li>There are many (hundreds to billions) of assertions each
-					with the exact same provenance.</li>
-				<li>All the assertions have been generated in the exact same
-					way (e.g. the same run of a next generation sequencing machine).</li>
-			</ul>
-
-			<p>The Open PHACTS system exploits the uniformity of these
-				mass-produced data to efficiently accommodate the datasets into
-				semantic search and automated reasoning tasks. We recommend that
-				these large datasets be exposed in a “nanopublication-compliant”
-				manner called “prenanopublication” (Figure 3). As with all
-				nanopublications, individual assertions are identified by placing
-				corresponding triples in named graphs. However, provenance and
-				supporting information, which is likely to be identical for every
-				individual data point, is added only at the level of the dataset.</p>
-
-			<p>Any provenance or supporting information supplied at the
-				dataset level automatically applies to all assertions within that
-				dataset.</p>
-
-			<p>When queried, the assertions in named graphs can be combined
-				with the dataset meta-data and turned into full nanopublications.
-				Thus, any nanopublication that is generated in this way will have
-				its own URI and provenance, providing all of the citability benefits
-				of the nanopublication approach, without bloating databases and
-				automated reasoning processes with massively redundant provenance
-				data. Prenanopublications are efficient way to encode large
-				homogeneous datasets while retaining all of the capabilities
-				associated with nanopublications.</p>
-			<div class="figure">
-				<p>
-					<img width="100%" src="figures/image007.png"></img>
-				<p>
-					<stong>Figure 3:</stong>
-					Prenanopublication from large datasets. Raw mass-produced data are
-					analysed and individual, scientific assertions are created. Each
-					set of triples corresponding to a single assertion is wrapped in a
-					named graph (NG). Additionally, provenance is assigned at the
-					dataset level using a specific descriptor (technical details on how
-					site descriptors can be used to generate large datasets of
-					prenanopublications are currently under development and will be
-					released at nanopub.org in 2012). When the data is queried and
-					returned, the assertions can be combined with the provenance
-					information to generate ‘bona-fide’ nanopublications.
-			</div>
-		</section>
-	</section>
-
-	<section class='appendix'>
-		<h2>How To: Technical Implementation</h2>
-		<p>There are several implementation issues that should be
-			considered when composing nanopublications:</p>
-
-		<p>Make “good” RDF for your data.</p>
-		Identify triples that correspond to individual assertions and wrap
-		them as named graphs. Add provenance information at either the dataset
-		or assertion level. Create a dataset descriptor and publish your RDF
-		to the linked data cloud.
-
-		<p>To publish your data as nanopublications, follow these steps:</p>
-
-		<section>
-			<h3>Create good quality RDF</h3>
-			<p>Nanopublication is a mechanism to wrap provenance around RDF
-				and therefore has been designed to have as few restrictions as
-				possible regarding how the RDF is generated. Yet, while providers do
-				not need to follow any special rules for producing
-				prenanopublication RDF, it does make sense to consider how RDF
-				encoding might ultimately facilitate the identification and
-				retrieval of assertions in the dataset.</p>
-
-			<p>Nanopublication makes no absolute vocabulary/ontology mandates
-				for the RDF generation itself – this is up to the producer. However,
-				the Open PHACTS consortium highly recommends the re-use of existing
-				ontologies, URIs, and data models, which is in line with
-				community-established principles for linked data [[ldb]] (see Vocabulary
-				Recommendations below).</p>
-
-			<p>Creating a semantically organised model for RDF can be
-				advantageous (as discussed in [[mapping]]) and good examples include schemes
-				for text mining results [[textmining]] and biological pathways [[biopax]].
-				For more information, also see Semantic Web For the Working
-				Ontologist [[swftwo]].</p>
-
-			<p>Importantly, good RDF requires that the entities within the
-				data be defined unambiguously using URIs. For this tools such as
-				ConceptWiki [[cw]], NCBO BioPortal[[bioportal]], Identifiers.org [[identifiers]] and other
-				authorities provide the stable URIs. Finally, if working with
-				experimental data, where possible create MIBBI-compliant [[mininfo]] data
-				using tools such as ISA [[studyassay]]. The Appendix provides additional tips
-				on creating good RDF.</p>
-		</section>
-		<section>
-			<h3>Do you have Nanopublications?</h3>
-			As emphasised herein, nanopublications offer a mechanism to capture
-			data elements and associate them with provenance. However, not every
-			data point that exists in life science databases requires publishing
-			as a nanopublication. Before considering this approach, the
-			“assertions” in the data need to be defined (such as curated facts,
-			experimental results, etc.) and the question of who would be citing
-			this information, and why, should be carefully considered.
-		</section>
-
-		<section>
-			<h3>Encode the Assertions in the Data</h3>
-			Once the assertions have been defined, the corresponding triples that
-			constitute the assertion should be identified and organised into a
-			named graph. This named graph should, of course, have a “good” URI,
-			meaning the URI is stable, uses a domain owned by the provider, is
-			opaque, is dereferencable and conforms to general URI best practices
-			[[ldb]]. The actual URI form is left to the discretion of the individual
-			provider. Following [[anatomy]] we also recommend the addition of an rdf:type
-			triples to describe each of the named graphs as shown in the
-			nanopublication schema.
-		</section>
-
-		<section>
-			<h3>Vocabulary Recommendations</h3>
-			<p>Open PHACTS recommends the use of established, open, public
-				vocabularies wherever possible to facilitate integration with other
-				resources. Below we present a non-exhaustive list of vocabularies
-				that describe concepts commonly used in life science data. We also
-				advise in using existing terms before minting new ones. To aid with
-				this, the use of the NCBO Bioportal [[bioportal]] and the ConceptWiki [[cw]] are
-				highly recommended in identifying existing concepts.</p>
-
-			<table>
-				<tr>
-					<th class="datatable">Ref</th>
-					<th class="datatable">Name</th>
-					<th class="datatable">Covers</th>
-					<th class="datatable">Link</th>
-				</tr>
-				<tr>
-					<td class="datatable">V1</td>
-					<td class="datatable">Dublin Core</td>
-					<td class="datatable">Core attribution</td>
-					<td class="datatable">http://dublincore.org/</td>
-				</tr>
-				<tr>
-					<td class="datatable">V2</td>
-					<td class="datatable">Open Provenance Model</td>
-					<td class="datatable">Provenance</td>
-					<td class="datatable">http://openprovenance.org/</td>
-				</tr>
-				<tr>
-					<td class="datatable">V3</td>
-					<td class="datatable">Nanopublication Ontology</td>
-					<td class="datatable">Nanopublication concepts</td>
-					<td class="datatable">http://www.nanopub.org/nschema</td>
-				</tr>
-				<tr>
-					<td class="datatable">V4</td>
-					<td class="datatable">Publishing roles ontology</td>
-					<td class="datatable">Publication concepts</td>
-					<td class="datatable">http://vocab.ox.ac.uk/pro</td>
-				</tr>
-				<tr>
-					<td class="datatable">V5</td>
-					<td class="datatable">Data Cube</td>
-					<td class="datatable">Statistics</td>
-					<td class="datatable">http://publishing-statistical-data.googlecode.com/svn/trunk/specs/src/main/html/cube.html</td>
-				</tr>
-				<tr>
-					<td class="datatable">V6</td>
-					<td class="datatable">Experimental Factor Ontology</td>
-					<td class="datatable">Common Experimental Concepts</td>
-					<td class="datatable">http://www.ebi.ac.uk/efo/</td>
-				</tr>
-				<tr>
-					<td class="datatable">V7</td>
-					<td class="datatable">Creative Commons Vocabulary</td>
-					<td class="datatable">Licencing</td>
-					<td class="datatable">http://wiki.creativecommons.org/CC_REL</td>
-				</tr>
-				<tr>
-					<td class="datatable">V8</td>
-					<td class="datatable">Orcid(*)</td>
-					<td class="datatable">Author identifiers</td>
-					<td class="datatable">http://orcid.org/</td>
-				</tr>
-				<tr>
-					<td class="datatable">V9</td>
-					<td class="datatable">Semantic science ontology</td>
-					<td class="datatable">Predicates for common scientific
-						relationships</td>
-					<td class="datatable">http://semanticscience.org/ontology/sio-core.owl</td>
-				</tr>
-			</table>
-		</section>
-
-		<section>
-			<h3>Handling Provenance</h3>
-			<p>Attribution: Nanopublications make it possible to create a
-				fine-grained system of attribution so as to incentivize data sharing
-				and interoperability. Attribution is therefore limited only to
-				people, institutions and funding sources, that is, any entity that
-				has a reputation. As always, standard vocabularies for publication
-				and author identification should be used (V4 and V8 above).
-				Supporting Information: Importantly, the aim of supporting
-				information is not to represent the entire experiment or reference
-				within this section but to provide “just enough” to enable
-				first-pass filtering over large nanopublication sets. Clearly, the
-				amount of supporting information included is an empirical and
-				somewhat personal decision. However, we offer the following
-				suggestions:</p>
-
-			<p>The primary application for supporting information is rapid,
-				contextual filtering. The supporting information should be simple,
-				ideally single triples to represent the species, cell type, assay
-				method, in silico vs. empirical data etc.</p>
-
-			<p>The supporting information may be URIs to further information.
-				In such cases, these URIs should be dereferencable and provide
-				experimental metadata in an easily discoverable form – i.e. provide
-				a good level of information at the specified URI without the need
-				for extensive graph traversal. Providers should use standard
-				experimental vocabularies (MIBBI, OBI etc) to provide
-				well-established predicates and entities for this data.</p>
-
-			<p>The supporting information for large datasets, such as
-				extensive experimental and other background data, should be included
-				at the dataset level.</p>
-		</section>
-
-		<section>
-			<h3>Versioning Of Nanopublications</h3>
-			A full description of versioning and an Open PHACTS system supporting
-			the integrity key is currently being prepared. However, in the
-			interim we recommend that all nanopublications contain a version
-			label using the Provenance, Authoring and Versioning Ontology
-			pav:versionNumber (see example nanopub above). Like any form of
-			publication, there is a risk (and so a potential reward) for the
-			author in creating a new nanopulbication. As the primary purpose of
-			nanopublication is to attach a reputation to a scientific assertion,
-			it will not be possible to delete nanopublications once they have
-			been released. Citation and impact metrics need to consider the
-			entire legacy of one’s nanopublication record and so nanopublications
-			must be preserved in the public record indefinitely. This includes
-			nanopublications that may subsequently be ‘proved’ to be false or in
-			error at a later date. Also, it is important to preserve the legacy
-			of nanopublications in order to reveal research trends that could be
-			exploited for knowledge discovery. With this in mind,
-			nanopublications can be revised only to delete, add or correct
-			information in the Provenance section (attribution, supporting). Any
-			change in the Assertion section constitutes an entirely new
-			nanopublication. Nanopublication revisions must contain meaningful
-			edits, and cannot be exact duplications of existing nanopublications.
-
-			Earlier versions of nanopublications can be “deprecated” by including
-			dc:isReplacedBy &lt;new_nanopub_uri&gt; . By defualut, OPS will
-			search for and cache only the most recent versions of any
-			nanopulbication.
-		</section>
-
-		<section>
-			<h3>Extending the Nanopublication Model</h3>
-			The nanopublication schema is designed to be extensible, such that
-			other elements can be created as needed. To do this, one would simply
-			extend the ontology, to describe the named graph that represents the
-			component, and then follow the coding pattern for provenance and
-			supporting information to add additional elements to
-			nanopublications.
-		</section>
-
-		<section>
-			<h3>Publishing Data</h3>
-			Once a provider has created nanopublication data, it should be
-			published in a manner that is both accessible and well described.
-			This means that data should be published according to principles set
-			out in [[sindice]], with an RDF file and dataset descriptor available via
-			the providing organisations’ web site. In addition to
-			provenance/supporting information, the use of the dataset descriptor
-			allows the Open PHACTS update detector to automatically identify
-			updates and refresh the OPS cache. Where possible the descriptor
-			should provide licensing information using the creative common's
-			vocabulary (see Vocabulary Recommendations, V7). Full technical
-			details of the descriptor are being developed and will be released
-			shortly in an updated guidelines document at nanopub.org.
-		</section>
-
-	</section>
 
 </body>
 
