@@ -179,7 +179,7 @@ In order to maintain flexibility we do not express this requirement in OWL.
 
 The CWA recommended nanopblucation schema is given below and can be linked to at http://nanopub.org/nschema
 
-		<pre class='schema'>
+		<pre class='example'>
 "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix rdfg: <http://www.w3.org/2004/03/trix/rdfg-1/>.
@@ -221,7 +221,7 @@ np:hasPublicationInfo rdfs:range np:PublicationInfo."
 These recommendations will be exemplified and elaborated upon in a library of nanopublication templates http://nanopub.org/wordpress/?page_id=8
 
 
-Integrity Key
+<section><h3>Integrity Key</h3>
  task force [Alasdair, Paul, Mark]
 -- use cases.... why have integrity keys ? 
 -- in principle, integrity keys are unique to nanopubs
@@ -232,39 +232,48 @@ Integrity Key
 
 
 
+</section>
 
 
 
 
-
-Nanopublication Compliant RDF for Large Data Sets
+<section><h3>Nanopublication Compliant RDF for Large Data Sets</h3>
 Big Data & nanopublication…. [Zuotian, Erik, Alasdair]
  
+</section>
 
-
-Best & Good Practices [everyone.... after we practice some]
+<section><h3>Best & Good Practices</h3>
+    [everyone.... after we practice some]
 How nanopublications relate to traditional publications… 
 
 Immutability & versions & deprecations…
--- Nanopublications SHOULD be immutable
--- immutability applies only to the nanopublication itself and not to resources linked to it... but creators SHOULD choose stable URIs when possible. 
--- Versioning: we use prov ‘hasRevision’
--- recommendations on deprecations, retraction... ‘hasStatus’ ? 
--- use of blank nodes# URIs
--- # URIs... best practice for URIs (persistant & registry)   ...nanopub.og...
+<ul>
+    <li> Nanopublications SHOULD be immutable
+    <li> immutability applies only to the nanopublication itself and not to resources linked to it... but creators SHOULD choose stable URIs when possible. 
+    <li> Versioning: we use prov ‘hasRevision’
+    <li> recommendations on deprecations, retraction... ‘hasStatus’ ? 
+    <li> use of blank nodes# URIs
+    <li> # URIs... best practice for URIs (persistant & registry)   ...nanopub.og...
+</ul>
 
 Whenever possible, existing ontologies and URIs should be used in semantic markup of nanopublication information. CWA recommended ontologies are… 
 
 The primary challenge when nanopublishing data is to model the semantics for clarity and keep a clear separation between the actual observations (measurements) from the interpretations (scientific assertions) and mark-up this distinction in as unambiguous way as possible. Other considerations include economization of memory usage, time-efficient querying, and avoidance of logical inconsistencies. 
-Nanopublications should present as low a barrier as possible to the exposure of data. Hence nanopublications have a minimal requirement of an assertion and provenance, but are extensible. The basic idea is that a minimal nanopublication can be easily created, but the better the annotation the more likely it is that the nanopublication will be found, used and cited by others. In other words, there is strong incentive for rich annotation, but a low barrier to getting started.
-Templates 
-•	statistical association [LUMC]
-•	genomic positions [LUMC, Christine-Oliver]
-•	curation: nextprot [Christine-Oliver]; chemspider [Colin]
-•	lots of chem-text [Colin]
-•	landMark [Mark]
 
-Implementation issues
+Nanopublications should present as low a barrier as possible to the exposure of data. Hence nanopublications have a minimal requirement of an assertion and provenance, but are extensible. The basic idea is that a minimal nanopublication can be easily created, but the better the annotation the more likely it is that the nanopublication will be found, used and cited by others. In other words, there is strong incentive for rich annotation, but a low barrier to getting started.
+
+<section><h3>Templates</h3>
+
+    <ul>
+        <li>statistical association [LUMC]
+        <li>genomic positions [LUMC, Christine-Oliver]
+        <li>curation: nextprot [Christine-Oliver]; chemspider [Colin]
+        <li>lots of chem-text [Colin]
+        <li>landMark [Mark]
+    </ul>
+</section>
+
+<section><h3>Implementation issues</h3>
 •	Repository / Store (e.g., URI control & data linking) [Rob & Marco]
 	-- Issuing URIs (DOIs?) ... what do nanopub IDs look like ?
 		nanopub.org////nextprot/nanopubID
@@ -274,9 +283,8 @@ Implementation issues
 •	Registry [Erik, Mark]
 	-- nanopu.org is an aggregator of registries like datahub (using “nanopub” tags)
 	-- nanopu.org is an instance for exclusive nanopub data (ckan powers data hub)
-
+</section>
         
-        </section>
 
 
 
