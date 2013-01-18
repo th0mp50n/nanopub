@@ -180,7 +180,7 @@ In order to maintain flexibility we do not express this requirement in OWL.
 The CWA recommended nanopblucation schema is given below and can be linked to at http://nanopub.org/nschema
 
 		<pre class='example'>
-"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix rdfg: <http://www.w3.org/2004/03/trix/rdfg-1/>.
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
@@ -215,11 +215,11 @@ np:hasProvenance rdfs:range np:Provenance.
 
 np:hasPublicationInfo a owl:FunctionalProperty.
 np:hasPublicationInfo rdfs:domain np:Nanopublication.
-np:hasPublicationInfo rdfs:range np:PublicationInfo."
+np:hasPublicationInfo rdfs:range np:PublicationInfo.
                 </pre>
 
 These recommendations will be exemplified and elaborated upon in a library of nanopublication templates http://nanopub.org/wordpress/?page_id=8
-
+        </section>
 
 <section><h3>Integrity Key</h3>
  task force [Alasdair, Paul, Mark]
@@ -239,12 +239,15 @@ These recommendations will be exemplified and elaborated upon in a library of na
 
 <section><h3>Nanopublication Compliant RDF for Large Data Sets</h3>
 Big Data & nanopublication…. [Zuotian, Erik, Alasdair]
- 
+<br>
+<img width="100%" src="figures/dataToNP.png"></img>
+
 </section>
 
 <section><h3>Best & Good Practices</h3>
     [everyone.... after we practice some]
 How nanopublications relate to traditional publications… 
+
 
 Immutability & versions & deprecations…
 <ul>
@@ -261,7 +264,8 @@ Whenever possible, existing ontologies and URIs should be used in semantic marku
 The primary challenge when nanopublishing data is to model the semantics for clarity and keep a clear separation between the actual observations (measurements) from the interpretations (scientific assertions) and mark-up this distinction in as unambiguous way as possible. Other considerations include economization of memory usage, time-efficient querying, and avoidance of logical inconsistencies. 
 
 Nanopublications should present as low a barrier as possible to the exposure of data. Hence nanopublications have a minimal requirement of an assertion and provenance, but are extensible. The basic idea is that a minimal nanopublication can be easily created, but the better the annotation the more likely it is that the nanopublication will be found, used and cited by others. In other words, there is strong incentive for rich annotation, but a low barrier to getting started.
-
+</section>
+        
 <section><h3>Templates</h3>
 
     <ul>
