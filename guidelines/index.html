@@ -239,6 +239,10 @@ np:hasPublicationInfo rdfs:range np:PublicationInfo.
 <section><h3>Nanopublication Compliant RDF for Large Data Sets</h3>
 Big Data & nanopublication…. [Zuotian, Erik, Alasdair]
 <br>
+To convert large existing datasets into nanopublications, we recommend using the Vocabulary of Interlinked Datasets ( VoID  http://www.w3.org/TR/void/ ) to create a nanopublication compliant RDF (ncRDF) description of the data. In this way we make each entry in the dataset (e.g. data row or sample value) referenceable, which in turn makes it possible to specify that a particular assertion was derived from a specific row of the original dataset.<BR></BR> 
+ncRDF is an intermediate step between the dataset as it is, and nanopublications. Rather than creating an extensive domain model, the RDF dataset uses a simple descriptive model. In practice this means that all data items from the original dataset are transformed (no pre-selection) and that all values remain the same (no normalization or rounding). Furthermore, simple ad-hoc ontologies can be used to provide entity and predicate descriptions: full semantic modeling is only required for the nanopublication itself. <BR></BR>
+An example of the use ncRDF in exposing a large dataset is given in the FANTOM5 nanopublictation template. Here, each row of the raw dataset is transformed to a ‘CagePeak resource’. Using the void:inDataset predicate, each CagePeak is linked back to the resource for the entire dataset. Subsequent predicates connect the CagePeak to entities that represent columns of the raw dataset.<BR></BR>
+
 <div class='figure'><img src="figures/dataToNP.png"></div>
 
 </section>
