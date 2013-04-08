@@ -191,21 +191,21 @@ In order to maintain flexibility there is no requirement for OWL.
 These recommendations will be exemplified and elaborated upon in a library of nanopublication templates http://nanopub.org/wordpress/?page_id=8. The CWA recommended nanopblucation schema is given below and can be linked to at http://nanopub.org/nschema </BR>
 
 		<pre class='example'>
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
-@prefix rdfg: <http://www.w3.org/2004/03/trix/rdfg-1/>.
-@prefix owl: <http://www.w3.org/2002/07/owl#>.
-@prefix np: <http://www.nanopub.org/nschema#>.
-@prefix dc: <http://purl.org/dc/elements/1.1/>.
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;.
+@prefix rdfg: &lt;http://www.w3.org/2004/03/trix/rdfg-1/&gt;.
+@prefix owl: &lt;hhttp://www.w3.org/2002/07/owl#&gt;.
+@prefix np: &lt;hhttp://www.nanopub.org/nschema#&gt;.
+@prefix dc: &lt;hhttp://purl.org/dc/elements/1.1/&gt;.
+@prefix xsd: &lt;hhttp://www.w3.org/2001/XMLSchema#&gt;.
 
-<http://www.nanopub.org/nschema> a owl:Ontology ;
+&lt;http://www.nanopub.org/nschema&gt; a owl:Ontology ;
 	dc:created "2012-10-26"^^xsd:date;
 	dc:modified "2012-10-26"^^xsd:date;
 	dc:creator "Paul Groth"^^xsd:string, 
 		"Andrew Gibson"^^xsd:string;
-		dc:contributor "Zuotian Tatum"^^xsd:string;
-	owl:priorVersion <http://www.nanopub.org/nschema-1.8>.
+	dc:contributor "Zuotian Tatum"^^xsd:string;
+	owl:priorVersion &lt;http://www.nanopub.org/nschema-1.8&gt;.
 
 ## A nanopublication should be associated with an assertion, publicationInfo and provenance,
 ## all of which are graphs. In order to maintain flexibility we do not express this requirement
