@@ -14,4 +14,5 @@ berjon.biblio = {
 "studyassay": "<a href=\"http://isa-tools.org/\">Investigation-Study-Assay </a>",
 "baseunits": "<a href=\"http://en.wikipedia.org/wiki/SI_base_unit\">Wikipedia page on SI Base Units </a>",
 "skos": "<a href=\"http://www.w3.org/2004/02/skos/\">SKOS Simple Knowledge Organization System </a>",
+"RFC2119": "<a href=\"http://www.ietf.org/rfc/rfc2119.txt\">Key words for use in RFCs to Indicate Requirement Levels</a>",
 }
