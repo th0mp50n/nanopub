@@ -1,1 +1,1 @@
-start of a readme file
+Now moved to https://github.com/Nanopublication/
